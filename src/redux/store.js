@@ -1,4 +1,6 @@
 import {  createStore, applyMiddleware  } from 'redux';
+
+//logger helps in logging all activities
 import logger from 'redux-logger';
 import rootReducer from './root-reducer'
 

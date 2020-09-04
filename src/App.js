@@ -58,12 +58,15 @@ class App extends React.Component {
 
 }
 
+//this user is coming from root reducer
 const mapStateToProps = ({user}) => ({
   currentUser: user.currentUser
 })
 
+//here ,first setCurrentUser is just a function
+//second set CurrentUser is imported from user.actions.js
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: useri => dispatch(setCurrentUser(useri))
 })
 
 
