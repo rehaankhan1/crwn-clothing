@@ -1,13 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, lazy, Suspense} from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
+import Spinner from '../../components/spinner/spinner.component'
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
-import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container'
-import CollectionPageContainer from '../collection/collection.container'
+const CollectionsOverviewContainer = lazy(() => import ('../../components/collections-overview/collections-overview.container'))
+const CollectionPageContainer = lazy(() => import ('../collection/collection.container'))
 
 //convert from fetchCollectionsStartAsync to getchCollectionsStart
-import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
+
 
 //here we pass all the props
 const ShopPage = ({fetchCollectionsStart, match}) => {
@@ -17,6 +19,7 @@ const ShopPage = ({fetchCollectionsStart, match}) => {
     //trigger useEffect only when fetCollectionsStart changes!
 
             return (
+                <Suspense fallback={<Spinner />}>
                 <div className='shop-page'>
                <Route
                 exact 
@@ -31,6 +34,7 @@ const ShopPage = ({fetchCollectionsStart, match}) => {
 
 
            </div>
+           </Suspense>
         )
     
  }
