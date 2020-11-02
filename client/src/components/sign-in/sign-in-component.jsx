@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-
+import swal from '@sweetalert/with-react';
 import './sign-in-component.styles.scss'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
@@ -13,6 +13,17 @@ const SignIn = ({emailSignInStart, googleSignInStart}) => {
    const { email, password } = userCredential
    const  handleSubmit = async (event) => {
         event.preventDefault()
+        
+        swal({
+            title: "Loading!",
+            text: "Please Wait!",
+            icon: "info",
+            buttons: false,
+            timer: 5000,
+          });
+          
+
+
         //const {emailSignInStart} = this.props
         emailSignInStart(email, password)
        

@@ -47,6 +47,8 @@ export const AddButton = styled(CustomButton)`
 export const BackgroundImage = styled.div`
   width: 100%;
   height: 95%;
+  border-style: solid;
+  border-width: 1px;
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;

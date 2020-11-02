@@ -78,6 +78,55 @@ const config = {
     
   }
 
+  export const convertCartItemSnapshotToMap = (collections) => {
+    // const transformedCollection = collections.then(doc => {
+    //   console.log(doc.data().items)
+    //   return doc.data().items
+    // })
+
+    console.log(collections)
+
+    const transformedCollection = collections.docs.then(doc => {
+      console.log(doc.data().items)
+      return doc.data().items
+    })
+
+    return transformedCollection
+
+
+    // let promise = new Promise(function (resolve, reject) {
+    //    collections
+    //    .then(doc => {
+    //     resolve(doc.data().items)
+    //   }).catch(err => {
+    //       reject(err)
+    //   })
+    // })
+
+    // promise.then(function (response) {
+    //   console.log(response)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+
+    // return promise.then(function (response) {
+    //   console.log(response)
+    //   return response
+    // }).catch(err => {
+    //   console.log(err)
+    //   return err
+    // })
+
+  }
+
+
+
+
+
+
+
+  
+
 
   export const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
@@ -88,6 +137,10 @@ const config = {
     })
   }
 
+
+  export const showDataFromId = data => {
+    console.log(` L O O K   H E R E -> ${(data.id)}`)
+  }
 
 
   firebase.initializeApp(config)
@@ -101,3 +154,129 @@ const config = {
   export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
   export default firebase
+
+
+
+
+
+// // Get current user 
+// if(store.get('userId')) {
+//   const userID = store.get('userId').id
+//   const userRef = firestore.doc(`cartItemFb/${userID}`)
+  
+//   const snapShot =  userRef.get()
+//   snapShot.then(function(snapShot) {
+//       if(snapShot.exists){
+//           console.log('varuuuuuuuuuururururu')
+//           let didFind = 0
+
+//           snapShot.data().items.map(doc => {
+//               if(doc.name == cartItemToAdd.name) {
+//                   try {        
+                  
+//                       userRef
+//                       .where('name', '==', doc.name)
+//                       .update(
+//                           firebase.firestore.FieldValue.arrayUnion({
+//                               imageUrl: cartItemToAdd.imageUrl,
+//                               name: cartItemToAdd.name,
+//                               price: cartItemToAdd.price,
+//                               quantity: 1
+//                           })
+                      
+                        
+//                       )
+                
+//                   didFind = 1
+//                   }catch(error) {
+//                       console.log('error updating quantity ->   ', error.message)
+//                   }
+//               }
+//           })
+
+//           if(didFind == 0){
+//            try {
+//               userRef.update(
+//                   {"items":
+//                   firebase.firestore.FieldValue.arrayUnion({
+//                       imageUrl: cartItemToAdd.imageUrl,
+//                       name: cartItemToAdd.name,
+//                       price: cartItemToAdd.price,
+//                       quantity: 1
+//                   })
+//               }
+                
+//               )
+//            }catch(error) {
+//               console.log('error appending ->   ', error.message)
+//            }
+//           }
+
+
+
+
+//       }else {
+//           try {
+//               userRef.set({
+//                   // { sharedWith: [{ who: "third@test.com", when: new Date() }] },
+//                   // items: [ { who: "third@test.com" } ]
+                 
+//                   items: [{
+//                       imageUrl: cartItemToAdd.imageUrl,
+//                       name: cartItemToAdd.name,
+//                       price: cartItemToAdd.price,
+//                       quantity: 1
+//                   }]
+                  
+//               })
+//           }catch(error) {
+//               console.log('error adding item ->   ', error.message)
+//           }
+//       }
+//   })
+
+   
+  
+//   // if(!snapShot.child("items")) {
+//   //      console.log('YOLO')
+//   //     try {
+//   //         userRef.set({
+//   //             // { sharedWith: [{ who: "third@test.com", when: new Date() }] },
+//   //             // items: [ { who: "third@test.com" } ]
+             
+//   //             items: [{
+//   //                 imageUrl: cartItemToAdd.imageUrl,
+//   //                 name: cartItemToAdd.name,
+//   //                 price: cartItemToAdd.price,
+//   //                 quantity: 1
+//   //             }]
+              
+//   //         })
+//   //     }catch(error) {
+//   //         console.log('error adding item ->   ', error.message)
+//   //     }
+//   // }else{
+
+//   //     console.log('veyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+//   // }
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

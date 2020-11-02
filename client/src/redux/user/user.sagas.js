@@ -1,27 +1,35 @@
 import {takeLatest, put, all, call} from 'redux-saga/effects'
 import UserActionTypes from './user.types'
 import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils'
+import {getCartItems} from '../cart/cart.actions'
+import store from 'store'
 
 import {SignInSuccess, SignInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure} from './user.actions'
-
+// import {getCartDocs} from '../cart/cart.actions'
 
 export function* getSnapshotFromUserAuth(userAuth) {
     try {
         const userRef = yield call(createUserProfileDocument, userAuth)
         const userSnapshot = yield userRef.get()
         yield put(SignInSuccess({ id: userSnapshot.id,  ...userSnapshot.data()}))
+        yield put(getCartItems(userSnapshot.id))
+        yield store.set('userId', { id:userSnapshot.id })
+        // yield put(getCartDocs())
     }catch(error) {
         yield put(SignInFailure(error))
     }
 }
 
-export function* signUpWithEmail({payload: {displayName,  email,  password}}) {
+export function* signUpWithEmail({payload: {displayName,  email,  password,  phoneNum,  address, postal}}) {
     try{
             const {user} = yield auth.createUserWithEmailAndPassword(email, password);
-            const userRef = yield call(createUserProfileDocument, user, {displayName})
+            const userRef = yield call(createUserProfileDocument, user, {displayName,  phoneNum,  address, postal})
             const userSnapshot = yield userRef.get()
             yield put(signUpSuccess({ id: userSnapshot.id,  ...userSnapshot.data()}))
-            console.log('TRIGGERED!')           
+            console.log('TRIGGERED!')    
+
+            yield put(getCartItems(userSnapshot.id))
+            yield store.set('userId', { id:userSnapshot.id })       
     }catch(error) {
             yield put(signUpFailure(error))
     }
@@ -33,6 +41,7 @@ export function* signInWithGoogle() {
     try {
         const {user} = yield auth.signInWithPopup(googleProvider)
         yield getSnapshotFromUserAuth(user)
+       
     }catch(error) {
         yield put(SignInFailure(error))
     }
@@ -60,6 +69,7 @@ export function* isUserAuthenticated() {
 export function* signOut() {
    try{
     yield auth.signOut()
+    store.remove('userId')
     yield put(signOutSuccess())
    }catch(error) {
         yield put(signOutFailure(error))

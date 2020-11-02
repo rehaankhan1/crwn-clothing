@@ -1,5 +1,5 @@
 import CartActionTypes from './cart.types'
-import {  addItemToCart, removeItemFromCart  } from './cart.utils'
+import {  addItemToCart, removeItemFromCart, removeItemCompletely  } from './cart.utils'
 
 const INITIAL_STATE = {
     hidden:true,
@@ -14,11 +14,21 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 hidden: !state.hidden
             }
 
+            // case CartActionTypes.GET_CART_ITEM:
+            //     return {
+            //         cartItems: getCartItemFromFirebase()
+            //     }
+
+            case CartActionTypes.SEND_CART_ITEM:
+                return {
+                    ...state,
+                    cartItems: action.payload
+                }
+
             case CartActionTypes.ADD_ITEM:
                 return{
                     ...state,
-                    cartItems:addItemToCart(state.cartItems, action.payload
-                    )
+                    cartItems:addItemToCart(state.cartItems, action.payload)
                 }
 
                 case CartActionTypes.REMOVE_ITEM:
@@ -30,10 +40,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 case CartActionTypes.CLEAR_ITEM_FROM_CART:
                     return {
                         ...state,
-                        cartItems: state.cartItems.filter(
-                            cartItem => cartItem.id !== action.payload.id
-                        )
+                        cartItems: removeItemCompletely(state.cartItems, action.payload)
                     }
+
+                // case CartActionTypes.GET_CART_DOCS:
+                //     return {
+                //         ...state,
+                //         //CsOcJ81OQ7WSzTHHVMoYy8Hx5Qq2
+                //         cartItems: getCartItemsFromFirebaseAgain("CsOcJ81OQ7WSzTHHVMoYy8Hx5Qq2")
+                //     }
 
                 case CartActionTypes.CLEAR_CART:
                     return {

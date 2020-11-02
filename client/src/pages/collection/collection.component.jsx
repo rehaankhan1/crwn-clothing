@@ -13,12 +13,17 @@ import {
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
+
+  // console.log(` L O O K   H E R E ->${JSON.stringify(data)}`)
+  // console.log(data.id)
+  
+
   return (
     <CollectionPageContainer>
       <CollectionTitle>{title}</CollectionTitle>
       <CollectionItemsContainer>
         {items.map(item => (
-          <CollectionItem key={item.id} item={item} />
+          <CollectionItem key={item.id} item={item}/>
         ))}
       </CollectionItemsContainer>
     </CollectionPageContainer>

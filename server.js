@@ -41,6 +41,13 @@ app.get('/service-worker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'))
 })
 
+app.post("/test", (req, res) => {
+  console.log('hello kitty!')
+  res.send('hello baby')
+})
+
+
+
 app.post("/payment", (req, res) => {
 
 
