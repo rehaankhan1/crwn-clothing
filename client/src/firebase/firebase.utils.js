@@ -16,7 +16,6 @@ const config = {
     //because when we will sign out it will be null  
     if(!userAuth) return; 
 
-    console.log(`-----${additionalData}`)
     const userRef = firestore.doc(`users/${userAuth.uid}`)
     const snapShot = await userRef.get()
 

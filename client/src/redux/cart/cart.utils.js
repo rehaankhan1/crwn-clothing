@@ -219,3 +219,35 @@ export const removeItemCompletely = (cartItems, cartItemToRemove) => {
 
     return toRet
 }
+
+
+export const removeEachItems = () => {
+
+    if(store.get('userId')){
+
+        const userID = store.get('userId').id
+        const userRef = firestore.doc(`cartItemFb/${userID}`)
+        const snapShot =  userRef.get()
+
+        snapShot.then(function(snapShot) { 
+            if(snapShot.exists){ 
+                try {
+                    userRef.set({
+                        // { sharedWith: [{ who: "third@test.com", when: new Date() }] },
+                        // items: [ { who: "third@test.com" } ]
+                       
+                        items: [
+                           
+                        ]
+                        
+                    })
+                }catch(error) {
+                    console.log('error removing all cartItems ->   ', error.message)
+                }
+            }
+        })
+
+    }
+
+    return []
+}

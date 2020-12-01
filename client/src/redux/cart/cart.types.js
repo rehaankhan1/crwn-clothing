@@ -5,7 +5,8 @@ const CartActionTypes = {
     CLEAR_ITEM_FROM_CART: 'CLEAR_ITEM_FROM_CART',
     CLEAR_CART: 'CLEAR_CART',
     GET_CART_ITEM: 'GET_CART_ITEM',
-    SEND_CART_ITEM: 'SEND_CART_ITEM'
+    SEND_CART_ITEM: 'SEND_CART_ITEM',
+    CLEAR_OFF_CART: 'CLEAR_OFF_CART'
 }
 
 export default CartActionTypes

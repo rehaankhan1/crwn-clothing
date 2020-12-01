@@ -31,8 +31,6 @@ export function* getCartItemFromFirebase({payload}) {
     // yield put(sendCartItem(SHOP_DATA))
 
     try {
-        console.log('J I Z Z ZY')
-        console.log(payload)
         const collectionRef = firestore.collection('cartItemFb').doc(payload)
         // const snapshot = yield collectionRef.get()
         // const collectionsMap = yield call(convertCartItemSnapshotToMap,  snapshot)
@@ -41,14 +39,9 @@ export function* getCartItemFromFirebase({payload}) {
             .then(doc => {
                return doc.data().items                
             }).then((data) => {
-                console.log(data)
+               
                 return data
             })
-
-
-
-        console.log(' B I L L U')
-        console.log(collectionsMap)
         yield put(sendCartItem(collectionsMap))
     }catch(error){
         console.log(error)

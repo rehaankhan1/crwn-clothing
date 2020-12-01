@@ -10,7 +10,7 @@
     SIGN_UP_START: 'SIGN_UP_START',
     SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
     SIGN_UP_FAILURE: 'SIGN_UP_FAILURE',
-    
+    GET_ORDER_AGAIN2: 'GET_ORDER_AGAIN2'
 }
 
 export default UserActionTypes

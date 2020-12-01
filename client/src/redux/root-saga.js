@@ -3,6 +3,7 @@ import {  all, call  } from 'redux-saga/effects'
 import {userSagas} from './user/user.sagas'
 import {cartSagas} from './cart/cart.sagas'
 import {shopSagas} from './shop/shop.sagas'
+import {orderSagas} from './orders/orders.sagas'
 
 export default function* rootSaga() {
     //whenever we want to add a new saga
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     yield all ([
         call(userSagas),
         call(cartSagas),
-        call(shopSagas)
+        call(shopSagas),
+        call(orderSagas)
     ])
 }

@@ -15,10 +15,12 @@ import { connect } from 'react-redux'
 import {  selectCurrentUser  } from './redux/user/user.selectors'
 import {checkUserSession} from './redux/user/user.actions'
 
+
 const Homepage = lazy(() => import('./pages/homepage/homepage.component'))
 const ShopPage = lazy(() => import('./pages/shop/shop.component'))
 const SignInAndSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up-page/sign-in-and-sign-up-page'))
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'))
+const OrderPage = lazy(() => import('./pages/orders/orders.component'))
 
 
 
@@ -44,6 +46,7 @@ const App = ({checkUserSession, currentUser}) => {
 
         <Route  path='/shop' component={ShopPage} />
         <Route exact path='/checkout' component={CheckoutPage} />
+        <Route exact path='/orders' component={OrderPage} />
         <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/' />): (<SignInAndSignUpPage/>)} />
         
         </Suspense>

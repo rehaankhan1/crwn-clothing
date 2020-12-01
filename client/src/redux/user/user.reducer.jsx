@@ -2,7 +2,8 @@ import   UserActionTypes   from './user.types'
 
 const INITIAL_STATE = {
     currentUser: null,
-    error: null
+    error: null,
+    orderList3: null
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload,
                 error: null
+            }
+
+            case UserActionTypes.GET_ORDER_AGAIN2:
+            return {
+                ...state,
+                orderList3: 900
             }
 
         case UserActionTypes.SIGN_OUT_SUCCESS:

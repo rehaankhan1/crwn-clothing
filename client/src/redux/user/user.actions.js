@@ -38,6 +38,13 @@ export const signOutFailure = (error) => ({
     payload: error
 })
 
+export const getOrderAgain = data => ({
+    // console.log(`hereeeeyyyyyyyy    y-> ${ Object.keys(data['data']['0']) }`)
+    // console.log(`againyee    ----> ${data['data']}`)
+    type: UserActionTypes.GET_ORDER_AGAIN2,
+    payload: data
+})
+
 export const signUpStart = (userData) => ({
     type: UserActionTypes.SIGN_UP_START,
     payload: userData
