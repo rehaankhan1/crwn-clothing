@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import Spinner from '../../components/spinner/spinner.component'
 import OrderListShow from '../../components/order-overview/order-overview.component'
 import {Heading} from './orders.styles'
+import store from 'store'
            
 
 import {fetchOrderAgain} from '../../redux/orders/orders.actions'
 
   const OrderPage = ({ fetchOrderAgain}) => {
+
+    if(store.get('userId')) { 
     
         fetchOrderAgain()
     
@@ -19,6 +22,10 @@ import {fetchOrderAgain} from '../../redux/orders/orders.actions'
          </Suspense>
         
     )
+
+  }else{
+    window.location.replace('/signin');
+  }
 
   }
 
